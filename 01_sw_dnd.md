@@ -34,9 +34,50 @@ Started back in the '50 when IT and softwares just started to kick in and a few 
 - Testing: The completed code is tested for quality and customer acceptance
 - Maintenance: Bug fixes and patches are applied.
 
+Pro: 
+- Easy to understand
+- Step-by-approach
 
+Contra:
+- Serial nature of the model
+- Does not handle change very well
+- No achievement(working code) till the end of the process
+- Quality (because of the limited time for a development cycle usually the testing is the one that suffers)
 
 ## Lean
+Toyota production system aka TPS
 
+- **Elimination of waste:** If something doesn't add value to the final product, get rid of it. There is no room for wasted work.
+- **Just-in-time:** Don't build something until the customer is ready to buy it. Excess inventory wastes resources.
+- **Continuous improvement (Kizan):** Always improve your processes with lessons learned and communication.
+
+Lean led to Agile software development
 
 ## Agile
+Agile is an application of Lean principles to software development.
+
+The following 12 principles are the core of the Agile Manifesto:
+
+- Customer satisfaction is provided through early and continuous delivery of valuable software.
+- Changing requirements, even in late development, are welcome.
+- Working software is delivered frequently (in weeks rather than months).
+- The process depends on close, daily cooperation between business stakeholders and developers.
+- Projects are built around motivated individuals, who should be trusted.
+- Face-to-face conversation is the best form of communication (co-location).
+- Working software is the principal measure of progress.
+- Sustainable development requires being able to maintain a constant pace.
+- Continuous attention is paid to technical excellence and good design.
+- Simplicity is the art of maximizing the amount of work not done is essential.
+- The best architectures, requirements, and designs emerge from self-organizing teams.
+- A team regularly reflects on how to become more effective and adjusts accordingly.
+
+With Agile the timeframes are smaller (can be 2 weeks)(sprints) and encompasses all the elements of the process. The aim is to ship a feature or capability  within 2 weeks. So with Agile when you are half way through the project you have workin code (with less functionality, but working)
+
+## Common desing patterns
+You don't want to reinvent the wheel each time you need a rolling thing to make something move. In software engineering, many common design paradigms have already been created, and you can reuse them in your software project. These design patterns make you faster and provide tried-and-true solutions that have been tested and refined. 
+- Model-View-Controller (MVC) 
+- Observer patterns
+
+### MVC
+
+
