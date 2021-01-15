@@ -78,6 +78,40 @@ You don't want to reinvent the wheel each time you need a rolling thing to make 
 - Model-View-Controller (MVC) 
 - Observer patterns
 
-### MVC
+### Model-View-Controller (MVC) Pattern
 
+Separation of concern (SoC) is decoupling and application's interdependencies and functions from its other parts. Leyered model (data access, business logic, and presentation)
+- flexibility
+- easier coding and maitanance
+- give structure to the application
+
+- Model: (db) The model is responsible for retrieving and manipulating data. It is often tied to some type of database but could be data from a simple file. It conducts all data operations, such as select, insert, update, and delete operations. The model receives instructions from the controller.
+- View: (web) The view is what the end users see on the devices they are using to interact with the program. It could be a web page or text from the command line. The power of the view is that it can be tailored to any device and any representation without changing any of the business logic of the model. The view communicates with the controller by sending data or receiving output from the model through the controller. The view's primary function is to render data.
+- Controller: (app) The controller is the intermediary between what the user sees and the backend logic that manipulates the data. The role of the controller is to receive requests from the user via the view and pass those requests on to the model and its underlying data store.
+
+### Observer Pattern
+
+The Observer pattern was created to address the problem of sharing information between one object to many other objects. This type of pattern describes a very useful behavior for distributed systems that need to share configuration information or details on changes as they happen. The Observer pattern is actually very simple and consists of only two logical components
+
+- Subject: The subject refers to the object state being observed in other words, the data that is to be synchronized. The subject has a registration process that allows other components of an application or even remote systems to subscribe to the process. Once registered, a subscriber is sent an update notification whenever there is a change in the subject's data so that the remote systems can synchronize.
+- Observer: The observer is the component that registers with the subject to allow the subject to be aware of the observer and how to communicate to it. The only function of the observer is to synchronize its data with the subject when called. The key thing to understand about the observer is that it does not use a polling process, which can be very inefficient with a larger number of observers registered to a subject. Updates are push only.
+
+
+## Linux Bash
+
+BASH (Bourne again shell)is a shell, and a shell is simply a layer between a user and the internal workings of an operating system. compatible with other shells like Z, ash, ss. BASH is not only a shell for command processing using standard Linux operating system commands. It can also read and interpret scripts for automation. Bash supports piping,variables, evaluation of conditions, and iteration. 
+
+Commands:
+- man (manuals)
+- sudo (temporarily upgrade your privileges by prepending the sudo command before you execute a command)
+- cat (displays the contents of a file to the screen)
+- more (gives you a prompt to continue one page at a time)
+- cd (directory navigation) .. (up one directory) / (move to root of the file system) /home/abcd (change dir to an exact too) abcd (change to abcd dir)
+- ls (list dir content ) -a (all, list everything. hidden files too) -l (list details. owner, group, privileges) -
+- mkdir (directory creation)
+- pwd (printing out current work directory)
+- cp (copy files)
+- mv (move, rename files)
+- rm (delete file)
+- touch ( create a file and/or change the timestamps on a file's access without opening it)
 
