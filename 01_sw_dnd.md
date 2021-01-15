@@ -115,3 +115,6 @@ Commands:
 - rm (delete file)
 - touch ( create a file and/or change the timestamps on a file's access without opening it)
 
+## Enviromental variables
+
+
