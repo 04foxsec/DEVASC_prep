@@ -117,4 +117,26 @@ Commands:
 
 ## Enviromental variables
 
+Environment variables are available in all operating systems and are typically set when you open your terminal from a configuration file associated with your login. You set these variables with similar syntax to how you set them when programming. BASH environment variables contain information about the current session.
 
+- env - list all the environmental variables
+- keywords with the = sign tied to values. ```PATH=/directory```
+- ```echo $PATH``` prints the PATH variable
+- append a variable ```export PATH=$PATH:/Home/bob/mama``` (append because of $PATH is on the right side of the = too)
+- to make a variable permanent: ```echo "export PATH=$PATH:/Home/bob/mama" >> .bashrc``` .bashrc containss the session profile
+- ```source``` command can be used to reload the variables from the hidden configuration file .bashrc: ```$ source ~/.bashrc```
+- ```.``` is also an alias for the source command and used like this```$ . ~/.bashrc```
+
+## Software Version Control (SVC)
+Software version control (SVC) typically involves a database that stores current and historical versions of source code to allow multiple people or teams to work on it at the same time. Instead of using inefficient techniques such as file locking, a version control system handles concurrent check-ins, allowing two programmers to commit code at the same time. Another aspect of a version control system is the ability to branch and merge code built independently. By creating a branch, you effectively create a separate work stream that has its own history and does not impact the main **trunk**of the code base. Once the code is written and any conflicts are resolved, the code from the branch can be merged back into the main trunk.
+
+### Git
+Git is free and open source. In 2005, Linus Torvalds (the father of Linux) created Git as an alternative to the SCM system BitKeeper. Git was created to be fast and scalable, with a distributed workflow that could support the huge number of contributors to the Linux kernel. **Note** GitHub is not Git. GitHub is a cloud-based social networking platform for programmers.
+
+#### Understanding Git
+
+Git is a distributed version control system built with scalability in mind. It uses a multi-tree structure, and if you look closely at the design, you see that it looks a lot like a file system. (Linus Torvalds is an operating system creator after all.) Git keeps track of three main structures, or trees (see Figure 2-8):
+
+- **Local workspace:** This is where you store source code files, binaries, images, documentation, and whatever else you need.
+- **Staging area:** This is an intermediary storage area for items to be synchronized (changes and new items).
+- **Head, or local repository:** This is where you store all committed items.
