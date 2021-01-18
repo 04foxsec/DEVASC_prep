@@ -140,3 +140,12 @@ Git is a distributed version control system built with scalability in mind. It u
 - **Local workspace:** This is where you store source code files, binaries, images, documentation, and whatever else you need.
 - **Staging area:** This is an intermediary storage area for items to be synchronized (changes and new items).
 - **Head, or local repository:** This is where you store all committed items.
+
+Another very important concept with Git is the file lifecycle. Each file that you add to your working directory has a status attributed to it. This status determines how Git handles the file. Figure 2-9 shows the Git file status lifecycle, which includes the following statuses:
+
+- Untracked: When you first create a file in a directory that Git is managing, it is given an untracked status. Git sees this file but does not perform any type of version control operations on it. For all intents and purposes, the file is invisible to the rest of the world. If you want Git to start tracking a file, you have to explicitly tell it to do so with the **git add** command; once you do this, the status of the file changes to tracked.
+- Unmodified: A tracked file in Git is included as part of the repository, and changes are watched. This status means Git is watching for any file changes that are made, but it doesn't see any yet.
+- Modified: Whenever you add some code or make a change to the file, Git changes the status of the file to modified. Modified status is where Git sees that you are working on the file but you are not finished. You have to tell Git that you are ready to add a changed (modified) file to the index or staging area by issuing the **git add** command again.
+- Staged: Once a changed file is added to the index, Git needs to be able to bundle up your changes and update the local repository. This process is called staging and is accomplished through **git commit**. At this point, your file status is moved back to the tracked status, and it stays there until you make changes to the file in the future and kick off the whole process once again.
+
+If at any point you want to see the status of a file from your repository, you can use the extremely useful command **git status** to learn the status of each file in your local directory.
