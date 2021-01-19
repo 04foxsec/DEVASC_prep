@@ -149,3 +149,26 @@ Another very important concept with Git is the file lifecycle. Each file that yo
 - Staged: Once a changed file is added to the index, Git needs to be able to bundle up your changes and update the local repository. This process is called staging and is accomplished through **git commit**. At this point, your file status is moved back to the tracked status, and it stays there until you make changes to the file in the future and kick off the whole process once again.
 
 If at any point you want to see the status of a file from your repository, you can use the extremely useful command **git status** to learn the status of each file in your local directory.
+
+
+|Command|syntax|Note|From|To|
+|---|---|---|---|---|
+|git init|```git init (repo name)```|Initializing a local repository|-|-|
+|git clone|```git clone (remote) (local)```|Initializing a repository by downalod a remote location|Remote repo|Local|
+|git status|```git status```|checks the reporsitory status|-|-|
+|git add|```git add (file) or (. or -A(all file))```|add file to stage|Unstaged|Stage|
+|git rm|```git rm (-r "recursive") (-f "force") (folder/file.py)```| remove file from stage|Stage|-|
+|git mv|```git mv (-f) (source) (destination)```|rename or move file|-|-|
+|git commit|```git commit (-a "add and commit") (-m "your commit message")```|move it from the index or staging area to the local copy of the repository| Stage| Local Repo|
+|git remote add|```git remote add (name) (url)```| remote repository creation|-|-|
+|git remote -v|```git remote -v```| remote repository listing|-|-|
+|git remote rm|```git remote rm (name) ```| remote repository deletion|-|-|
+|git push|```git push (remotename) (branchname)```|sync your local repository to the remote repository|Local Repo| Remote Repo|
+|git pull|```git pull```|fetches the latest version of the remote master repository and merges it into the local repository|Remote repo| Local Repo|
+|git log|```git log```| shows commits with a hash for the repository|-|-|
+|git branch|```git branch (-d "delete") <branchname> [commit]```| create new branch |-|-|
+|git checkout|```git checkout [-b] (branchname or commit)```| change branch|-|-|
+|git merge|```git merge (branchtomerge)```| merge branch into master branch|branch|current branch|
+|git diff|```git diff ``` |highlights the differences between your working directory and the index|-|-|
+|git diff --cached| ```git diff --cached```|This command shows any changes between the index and your last commit.|-|-|
+|git diff HEAD|```git diff HEAD```|shows the differences between your most recent commit and your current working directory.|-|-|
