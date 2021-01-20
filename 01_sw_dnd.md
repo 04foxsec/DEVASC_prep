@@ -38,7 +38,7 @@ Pro:
 - Easy to understand
 - Step-by-approach
 
-Contra:
+Con:
 - Serial nature of the model
 - Does not handle change very well
 - No achievement(working code) till the end of the process
@@ -130,7 +130,7 @@ Environment variables are available in all operating systems and are typically s
 ## Software Version Control (SVC)
 Software version control (SVC) typically involves a database that stores current and historical versions of source code to allow multiple people or teams to work on it at the same time. Instead of using inefficient techniques such as file locking, a version control system handles concurrent check-ins, allowing two programmers to commit code at the same time. Another aspect of a version control system is the ability to branch and merge code built independently. By creating a branch, you effectively create a separate work stream that has its own history and does not impact the main **trunk**of the code base. Once the code is written and any conflicts are resolved, the code from the branch can be merged back into the main trunk.
 
-### Git
+## Git
 Git is free and open source. In 2005, Linus Torvalds (the father of Linux) created Git as an alternative to the SCM system BitKeeper. Git was created to be fast and scalable, with a distributed workflow that could support the huge number of contributors to the Linux kernel. **Note** GitHub is not Git. GitHub is a cloud-based social networking platform for programmers.
 
 #### Understanding Git
@@ -172,3 +172,37 @@ If at any point you want to see the status of a file from your repository, you c
 |git diff|```git diff ``` |highlights the differences between your working directory and the index|-|-|
 |git diff --cached| ```git diff --cached```|This command shows any changes between the index and your last commit.|-|-|
 |git diff HEAD|```git diff HEAD```|shows the differences between your most recent commit and your current working directory.|-|-|
+
+## Code review
+
+The following are a few common benefits of code review:
+
+- Other people check our work for comprehension and technical accuracy 
+- It helps you create higher-quality software.(The intent behind a code review process is to take good code and make it better by showing it to others and having them critique it and look for potential errors)
+- It enables your team to be more cohesive and deliver software projects on time.
+- It can help you find more defects and inefficient code that unit tests and functional tests might miss, making your software more reliable.
+
+
+The following are some good practices to help make your code review effective:
+
+-Use a code review checklist that includes organization-specific practices (naming conventions, security, class structures, and so on) and any areas that need special consideration. The goal is to have a repeatable process that is followed by everyone.
+-Review the code, not the person who wrote it. Avoid being robotic and harsh so you don�t hurt people�s feeling and discourage them. The goal is better code, not disgruntled employees.
+-Keep in mind that code review is a gift. No one is calling your baby ugly. Check your ego at the door and listen; the feedback you receive will make you a better coder in the long run.
+-Make sure the changes recommended are committed back into the code base. You should also share findings back to the organization so that everyone can learn from mistakes and improve their techniques.
+
+---
+### Terms in this chaper
+
+- **Software Development Lifecycle (SDLC)**
+- **Waterfall:** is a serial approach to software development that is divided into 5 phases: Requirements/analysis, design, Coding, testing and maintanance
+- **Lean:** Toyota production system(TPS):Elimination of waste, Just-in-time, Continuous improvement (Kizan)
+- **Agile:** Is an application of Lean principles to software development. There are 12 principles that are the core of the Agile Manifesto.
+- **Model-View-Controller (MVC):** Separation of concern (SoC) is decoupling and application's interdependencies and functions from its other parts. Leyered model (data access, business logic, and presentation)
+- **Observer:** The Observer pattern(sharing information between one object to many other objects) is actually very simple and consists of only two logical components Subject(the data source) and Observer(data subscriber)
+- **software version control:** Typically involves a database that stores current and historical versions of source code to allow multiple people or teams to work on it at the same time. Ability to branch and merge code built independently.
+- **Git** Git is free and open source. In 2005, Linus Torvalds (the father of Linux) created Git as an alternative to the SCM system BitKeeper. 
+- **GitHub** GitHub is not Git. GitHub is a cloud-based social networking platform for programmers.
+- **repository** This is where you store all committed items.
+- **staging** This is an intermediary storage area for items to be synchronized (changes and new items).
+- **index** is also known as cache, directory cache, current directory cache, staging area, staged files.
+- **local workspace**:This is where you store source code files, binaries, images, documentation, and whatever else you need.
