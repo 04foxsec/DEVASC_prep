@@ -24,4 +24,39 @@ At this point, you will see your virtual environment name in parentheses at the 
 
 To turn off the virtual environment, just type **deactivate** at the command prompt, and your normal command prompt returns, indicating that you are using your local system Python setup.
 
-To install new modules for Python, you use **pip**, which pulls modules down from the PyPI repository. ```(myvenv)$ pip install "packagename"```
+To install new modules for Python, you use **pip**, which pulls modules down from the PyPI repository. ```(myvenv)$ pip install "packagename"``` 
+
+The pip command also offers a search function that allows you to query the package index: ```(myvenv)$ pip search "search value"``` 
+
+The output includes the name, version, and a brief description of what the package does. To install a specific version ```pip install package==1.1.1.``` 
+
+Using a requirements.txt file included with your code is another essential good practice. If you have a requirements.txt file included with your code, it will give pip a set of packages that need to be installed, and you can issue this one command to get them loaded: ```pip install -r requirements.txt ```
+
+Contents of requirements.txt
+```ansible==2.6.3
+black==19.3b0
+flake8==3.7.7
+genie==19.0.1
+```
+If want to save the current modules configured in your virtual environment, you can use the **freeze** command and have it automatically populate the requirements.txt file: ```pip freeze > requirements.txt```
+
+#Python syntax
+
+The word *syntax* is used to describe structure in a progaming language. Python is a looser language than some, it does have rules that should be followed to keep your code not only readable but functional.  Python is best understood through its core philosophy (The Zen of Python):
+
+- Beautiful is better than ugly.
+- Explicit is better than implicit.
+- Simple is better than complex.
+- Complex is better than complicated.
+- Readability counts.
+
+Python is a scripted language, which means that any text editor can become a Python programming environment. The easiest way to get started with some Python code is to just enter ```python3``` at the command prompt.
+
+```
+$ python3
+>>> print("Savannah rules!")
+Savannah rules!
+```
+For doing simple repetitive tasks, the interpreter is a quick interface to Python. For any program that you want to do a lot of editing, an editor is your best bet.
+
+
