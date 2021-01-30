@@ -4,7 +4,7 @@ The 200-901 DevNet Associate DEVASC exam is not a Python test per se. You will n
 
 Many UNIX-based operating systems, such as Mac and Linux, already have Python installed, but with Windows, you need to install it yourself. This used to be a hassle, but now you can even install Python from the Windows Store. On a Mac, the default version of Python is 2.7, and you should update it to the more current 3.8 version. One of the easiest ways is to head over to python.org and download the latest variant from the source. The installation is fast, and there are many tutorials on the Internet that walk you through the process.
 
-## Python Virtual environment
+## 1. Python Virtual environment
 
 The use of Python 3 has changed dramatically as support for the 2.x version ended in January 2020. The 3.x version came out in 2008 and is the one that you should be using today. Of course, this version issue is still a problem even within the 3.x train of Python and the corresponding modules you may want to use. To address this compatibility conundrum across different versions and modules, Python virtual environments have been created. 
 Such an environment allows you to install a specific version of Python and packages to a separate directory structure. This way, you can ensure that the right modules are loaded, and your applications don't break when you upgrade your base Python installation. 
@@ -42,7 +42,7 @@ genie==19.0.1
 ```
 If want to save the current modules configured in your virtual environment, you can use the **freeze** command and have it automatically populate the requirements.txt file: ```pip freeze > requirements.txt```
 
-## Python syntax
+## 2. Python syntax
 
 The word *syntax* is used to describe structure in a progaming language. **Python is a looser language than some, it does have rules that should be followed to keep your code not only readable but functional.**  Python is best understood through its core philosophy (The Zen of Python):
 
@@ -64,7 +64,7 @@ For doing simple repetitive tasks, the interpreter is a quick interface to Pytho
 One aspect in which Python is different from other languages is that within Python code, **whitespace matters. Python uses indentation to separate blocks of code.
 Python allows you to use spaces or tabs. The standard for Python from the PEP 8 style guide is to use four spaces of indentation before each block of code.**
 
-## Commenting in python
+## 3. Commenting in python
 
 ```# comemnt``` is a single line comment
 ```
@@ -74,11 +74,11 @@ comment'''
 ``` 
 Triple (') quote is multi line commenting.
 
-## Data Types and Variables
+## 4. Data Types and Variables
 
 Python supports many data types natively. Python can also be expanded with modules to support even more variables. A variable is really just a label that maps to a Python object stored somewhere in memory. Without variables, your programs would not be able to easily identify these objects, and your code would be a mess of memory locations.
 
-### Varialbles
+### 4.1. Varialbles
 
 Assigning a variable in Python is very straightforward. Python auto types a variable, and you can reassign that same variable to another value of a different type in the future. (Try doing that in C!) You just need to remember the rules for variable names:
 
@@ -87,7 +87,7 @@ Assigning a variable in Python is very straightforward. Python auto types a vari
 - A variable name can only consist of alphanumeric characters and underscores (A-Z, 0-9, and _).
 - A variable name is case sensitive (so Value and value are two different variable names).
 
-### Data types
+### 4.2. Data types
 
 **Everything in Python is an object, and depending on the type of object, there are certain characteristics that you must be aware of when trying to determine the correct action you can perform on them**. In Python, **whenever you create an object, you are assigning that object an ID that Python uses to recall what is being stored**. This mechanism is used to **point to the memory location of the object in question and allows you to perform actions on it, such as printing its value. When the object is created, it is assigned a type that does not change. This type is tied to the object and determines whether it is a string, an integer, or another class.**
 
@@ -103,14 +103,14 @@ Within these types, you are allowed to either change the object (mutable) or are
 |Dictionary|dict|Yes|Unordered key:value pairs, such as {"key1":"value1","name":"Pip"}|
 |Set|set|Yes|Unordered collection of unique objects, such as {"a","b"}|
 
-#### Integers and Folating point
+#### 4.2.1 Integers and Folating point
 
 The integers and floating point numbers are the simplest of data types:
 
 - Integers: Whole numbers without decimal points
 - Floating point: Numbers with decimal points or exponents (such as 10e5, which indicates 10 to the fifth power)
 
-##### Numerical Operators
+##### 4.2.1.1 Numerical Operators
 
 Python can perform advanced calculations, so it is used heavily in data science, and many features are built into the language and can be easily added with modules.
 
@@ -134,7 +134,7 @@ Python can perform advanced calculations, so it is used heavily in data science,
 
 In most languages, the parentheses are preferred over anything else. Most Python programmers use them liberally in their math formulas to make them simpler to construct without being so strict with the rules. 
 
-#### Numerical Data representation
+#### 4.2.1.2 Numerical Data representation
 
 You have the option to use other base systems instead of just the default base 10. You have three choices in addition to base 10: binary (base 2), octal (base 8), and hex (base 16). You need to use prefixes before integers in order for Python to understand that you are using a different base:
 
@@ -147,7 +147,7 @@ You have the option to use other base systems instead of just the default base 1
 >>> 0xbadbeef
 195935983
 ```
-#### Booleans
+#### 4.2.2 Booleans
 
 **A Boolean has only two possible values, True and False.** You use comparison operators to evaluate between two Boolean objects in Python. This data type is the foundation for constructing conditional steps and decisions within programs. 
 
@@ -161,7 +161,7 @@ You have the option to use other base systems instead of just the default base 1
 |```==```|Equal to|5 = "5"|False|
 |```!=```|Not equal to|5 != "5"|True|
 
-#### Strings
+#### 4.2.3 Strings
 
 The **string data type is a sequence of characters and uses quotes to determine which characters are included**. The string "Hello" is just a set of characters that Python stores in order from left to right. Even if a string contains a series of numbers, it can still be a string data type.
 
@@ -172,7 +172,7 @@ The **string data type is a sequence of characters and uses quotes to determine 
 >>> a[0]
 'D'
 ```
-##### Ranges
+##### 4.2.3.1 String Ranges
 You can also specify ranges to print. The **colon operator gives you control over whole sections of a string. The first number is the beginning of the slice, and the second number determines the end. The second number may be confusing at first because it is intended to identify "up to but not including" the last character.**
 
 |Range| Value|
@@ -191,6 +191,7 @@ You **can perform math operations on strings as well.** The + is used to add or 
 'DevNet Rocks DevNet Rocks DevNet Rocks DevNet Rocks DevNet Rocks '
 ```
 
+##### 4.2.3.2 String Methods
 **There is a tremendous amount of string manipulation you can do with Python, and there are a number of built-in methods in the standard string library. These methods are called with a dot after the variable name for a string.**
 
 |Method|What It Does|
@@ -205,5 +206,61 @@ You **can perform math operations on strings as well.** The + is used to add or 
 |str.rstrip([chars])|Strip whitespace characters from the front of the string|
 str.strip([chars])|Remove whitespace characters from the beginning and end of the string|
 |str.upper()|Make the string all uppercase|
+
+#### 4.2.4 Lists
+
+Python, unlike other programming languages, such as C++ and Java, doesn't have arrays. **If you want to store a bunch of values, you can use a list.** You can use a variable to store a collection of items in a list. 
+
+```
+>>> kids = ['Caleb', 'Sydney', 'Savannah']
+>>> kids
+['Caleb', 'Sydney', 'Savannah']
+```
+
+**A list can contain any Python object, such as integers, strings, and even other lists.** A list can also be empty and is often initialized in an empty state for programs that pull data from other sources. ``` mylist=[]``` or ```my2list=list()```
+
+Lists are similar to strings in that each is a set of **items indexed by Python that you can interact with and slice and dice**. To pull out values, you just use the variable name with brackets and the index number, which starts at 0.
+```
+>>> kids[1]
+Sydney
+```
+Unlike strings, **lists are mutable objects**, which means you can change parts of the list at will. With a string, you can't change parts of the string without creating a new string. This is not the case with lists, where you have a number of ways to make changes. 
+```
+>>> kids
+['Caleb', 'Sidney', 'Savannah']
+>>> kids[1]="Sydney"
+>>> kids
+['Caleb', 'Sydney', 'Savannah']
+```
+You **can concatenate lists as well** by using the + operator to join two lists together. **Slicing or ranges also apply here.** The elements in the list are the items in the bucket.
+```
+>>> a = [1, 2, 4, 5]
+>>> b = [6, 7, 8, 9, 10]
+>>> c = a + b
+>>> print(c)
+[1, 2, 4, 4, 5, 6, 7, 8, 9, 10]
+>>> c[1:4]
+[2, 3, 4]
+>>> c[ :-4]
+[1, 2, 3, 4, 5, 6]
+>>> c[:]
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+
+##### 4.2.4.1 List Methods
+
+|Method|What It Does|
+|------|------------|
+|list.append(element)|Adds an element to the end of the list|
+|list.clear()|Removes everything from the list|
+|list.copy(alist)|Returns a copy of the list|
+|list.count(element)|Shows the number of elements with the specified value|
+|list.extend(alist)|Adds the elements of a list to the end of the current list|
+|list.index()|Returns the index number of the first element with a specified value|
+|list.insert( index, element)|Adds an element at a specified index value|
+|list.pop(index)|Removes an element at a specific index position, or if no index position is provided, removes the last item from the list|
+|list.remove()|Removes a list item with a specified value|
+|list.reverse()|Reverses the list order|
+|list.sort()|Sorts the list alphabetically and/or numerically|
 
 
