@@ -263,4 +263,84 @@ You **can concatenate lists as well** by using the + operator to join two lists 
 |list.reverse()|Reverses the list order|
 |list.sort()|Sorts the list alphabetically and/or numerically|
 
+#### 4.2.5 Tuples
+
+**Tuples and lists are very similar.** The biggest difference between the two comes down to mutability. As discussed earlier, Python data types are either mutable or immutable. **Lists are mutable, and tuples are immutable.** So why would you need these two types if they are so similar? It all comes down to how Python accesses objects and data in memory. **When you have a lot of changes occurring, a mutable data structure is preferred** because you don't have to create a new object every time you need to store different values. **When you have a value that is constant and referenced in multiple parts of a program, an immutable data type (such as a tuple), is more memory efficient and easier to debug.** 
+
+To create a tuple, you use parentheses instead of brackets. You can use the ```type()``` function to identify a Python data type you have created.
+```
+>>> person = (2012, 'Mike', 'CCNA')
+>>> person
+(2012, 'Mike', 'CCNA')
+>>> type(person)
+<class 'tuple'>
+```
+You access data in a tuple the same way as in a list, by using brackets and the index value of the item in the tuple that you want to return:
+```
+>>> person[0]
+2012
+```
+What **you can't do with a tuple is make an assignment to one of the values**:
+```
+>>> person[0]=15
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+```
+Tuples can, however, be used to assign a set of variables quickly:
+```
+>>> (a, b, c) = (12, 'Fred',18)
+>>> c
+18
+```
+
+#### 4.2.6 Dictionaries
+
+A dictionary provides another way of creating a collection of items. Why do you need another way of storing data when you already have lists and tuples? A list is an ordered set of items tracked by an index. What if you need to access data that is tied to a certain value, such as a person�s name? This capability is exactly why you need dictionaries in Python. A dictionary saves a ton of effort by giving you a built-in system for storing data in a key:value pair. As when you use labels on files in a filing cabinet, you can assign data to a key and retrieve it by calling that key as if you are pulling a file from the cabinet. Dictionaries don�t have any defined order; all you need is the key�and not some index number�to get access to your data. There are some rules regarding dictionaries.
+
+**Keys:** A dictionary's keys are limited to only using immutable values (int, float, bool, str, tuple, and so on). No, you can't use a list as a key, but you can use a tuple, which means you could use a tuple as a key (immutable) but you can't use a list as a key (mutable).
+**Values:** A value can be any Python object or any combination of objects. To create a dictionary, you use braces and your key and value separated by a colon. You separate multiple items with commas.
+```
+>>> cabinet = { "scores":(98,76,95), "name":"Chris","company":"Pisco"}
+>>> type(cabinet)
+<class 'dict'>
+```
+Instead of using an index, you **use the key, to get the value.**
+```
+>>> cabinet["scores"]
+(98, 76, 95)
+>>> cabinet["company"]
+'Pisco'
+```
+
+To add more items to a dictionary, you can assign them with a new key. You can even add another dictionary to your existing dictionary, as shown in this example:
+```
+>>> cabinet["address"] = {"street":"123 Anywhere Dr","city":"Franklin", "state":"TN"}
+>>> cabinet["address"]
+{'street': '123 Anywhere Dr', 'city': 'Franklin', 'state': 'TN'}
+```
+
+#### 4.2.7 Sets
+
+A **set in Python consists of an unordered grouping of data and is defined by using the curly braces** of a dictionary, **without the key:value pairs**. **Sets are mutable**, and you can add and remove items from the set. **You can create a special case of sets called a frozen set that makes the set immutable.** A frozen set is often used as the source of keys in a dictionary (which have to be immutable); it basically creates a template for the dictionary structure. If you are familiar with how sets work in mathematics, the various operations you can perform on mutable sets in Python will make logical sense.
+```
+>>> numbs = {1, 2, 4, 5, 6, 8, 10}
+>>> odds = {1, 3, 5, 7, 9}
+```
+To check that these are indeed sets, use the type() function:
+```
+>>> type(odds)
+<class 'set'>
+```
+To join two sets (just as in a mathematical join), you can use the | operator to show a combined set with no duplicates:
+```
+>>> numbs | odds
+{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+```
+You can get an intersection of two sets and show what numbers are in both by using the & operator:
+```
+>>> numbs & odds
+{1, 5}
+```
+There are many ways to evaluate sets, and the Python documentation can be used to explore them all. In addition, Python has library collections that give you even more options for ways to store data. Search the Python documentation for "collections" and take a look at ordered dictionaries, named tuples, and other variations that may suit your data collecting needs. For the purposes of the DEVASC exam, though, you do not need to know data structures beyond the basic types discussed here.
 
