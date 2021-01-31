@@ -23,6 +23,19 @@ devnet()
    prints simple function
 ```
 
+### Arguments and parameters
+
+An **argument is some value (or multiple values) that you pass to a function** when you call the function within code. Arguments allow a function to produce different results and make code reuse possible. You simply place arguments within the parentheses after a function name. Each function must define how it will use arguments, using parameters to identify what gets passed in and how it gets used. **A parameter is simply a variable that is used in a function definition** that allows code within the function to use the data passed to it. To get results back from the function, you use the keyword **return** and the object you want to pass back.
+
+```
+def sub(arg1, arg2):
+  result = arg1 - arg2
+  return result
+
+print(sub(10, 15))
+-5
+```
+The variable result is local, meaning that it is not accessible to the main Python script, and it is used only within the function itself. You can, however, access global variables from within the function; you might do this, to set certain constants or key variables that any function can use (for example, IP addresses). The difference in **accessibility between a local variable and global variable is important**, because they allow your code to maintain separation and can keep your functions self-contained.
 
 
 
