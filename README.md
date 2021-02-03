@@ -5,9 +5,10 @@
 - [Cerification Cert Guide](https://www.ciscopress.com/store/cisco-certified-devnet-associate-devasc-200-901-official-9780136642961)
 
 Topics from Cert Gude:
-1. Software design and development
-2. Introduction to Python
-3. Python Functions, Classes, and Modules
+1. [Software design and development](https://github.com/04foxsec/DEVASC_prep/blob/main/01_sw_dnd.md)
+2. [Introduction to Python](https://github.com/04foxsec/DEVASC_prep/blob/main/02_python_basics.md)
+  2.1 [Data types](https://github.com/04foxsec/DEVASC_prep/blob/main/02_python_data_types.md)
+3. [Python Functions, Classes, and Modules](https://github.com/04foxsec/DEVASC_prep/blob/main/02_python_functions_classes_modules.md)
 4. Working with Data in Python
 5. Application Programming Interfaces (APIs)
 6. RESTful API Requests and Responses
