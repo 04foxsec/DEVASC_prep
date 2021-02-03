@@ -100,6 +100,17 @@ greeting('Sydney', "How are you?")
 Hello Sydney, How are you?
 ```
 
+## Object-Oriented Programming and Python
+Python was developed as a modern object-oriented programming (OOP) language. **Object-oriented programming is a computer programming paradigm that makes it possible to describe real-world things and their relationships to each other**. If you wanted to describe a router in the physical world, for example, you would list all its properties, such as ports, software versions, names, and IP addresses. In addition, you might list different capabilities or functions of the router that you would want to interact with. OOP was intended to model these types of relationships programmatically, allowing you to create an object that you can use anywhere in your code by just assigning it to a variable in order to instantiate it.
+
+Objects are central to Python; in fact, Python really is just a collection of objects interacting with each other. **An object is self-contained code or data** and the idea of OOP is to break up a program into smaller, easier-to-understand components. Up until now, you have mainly seen procedural programming techniques, which take a top-down approach and follow predefined sets of instructions. While this approach works well for simple programs, to write more sophisticated applications with better scalability, OOP is often the preferred method used by professional programmers. However, Python is very flexible in that you can mix and match these two approaches as you build applications.
+
+Functions are an important part of the OOP principles of reusability and object-oriented structure. For the 200-901 DevNet Associate DEVASC exam, you need to be able to describe the benefits and techniques used in Python to build modular programs. Therefore, you need to know how to use Python classes and methods, which are covered next.
+
 ## Classes
+
+In Python, you use classes to describe objects. Think of a **class as a tool you use to create your own data structures that contain information about something;** you can then use functions (methods) to perform operations on the data you describe. A class models how something should be defined and represents an idea or a blueprint for creating objects in Python.
+
+
 
 ## Modules
