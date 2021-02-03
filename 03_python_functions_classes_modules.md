@@ -101,7 +101,8 @@ Hello Sydney, How are you?
 ```
 
 ## Object-Oriented Programming and Python
-Python was developed as a modern object-oriented programming (OOP) language. **Object-oriented programming is a computer programming paradigm that makes it possible to describe real-world things and their relationships to each other**. If you wanted to describe a router in the physical world, for example, you would list all its properties, such as ports, software versions, names, and IP addresses. In addition, you might list different capabilities or functions of the router that you would want to interact with. OOP was intended to model these types of relationships programmatically, allowing you to create an object that you can use anywhere in your code by just assigning it to a variable in order to instantiate it.
+Python was developed as a modern object-oriented programming (OOP) language. **Object-oriented programming is a computer programming paradigm that makes it possible to describe real-world things and their relationships to each other**. Unlike procedure oriented programming, where the main emphasis is on functions, object oriented programming stresses on objects. **An object is simply a collection of data (variables) and methods (functions) that act on those data.** Similarly, **a class is a blueprint for that object.**
+
 
 Objects are central to Python; in fact, Python really is just a collection of objects interacting with each other. **An object is self-contained code or data** and the idea of OOP is to break up a program into smaller, easier-to-understand components. Up until now, you have mainly seen procedural programming techniques, which take a top-down approach and follow predefined sets of instructions. While this approach works well for simple programs, to write more sophisticated applications with better scalability, OOP is often the preferred method used by professional programmers. However, Python is very flexible in that you can mix and match these two approaches as you build applications.
 
@@ -109,8 +110,41 @@ Functions are an important part of the OOP principles of reusability and object-
 
 ## Classes
 
-In Python, you use classes to describe objects. Think of a **class as a tool you use to create your own data structures that contain information about something;** you can then use functions (methods) to perform operations on the data you describe. A class models how something should be defined and represents an idea or a blueprint for creating objects in Python.
+In Python, you use classes to describe objects. Think of a **class as a tool you use to create your own data structures that contain information about something;** you can then use functions (methods) to perform operations on the data you describe. 
 
+We can think of class as a sketch (prototype) of a house. It contains all the details about the floors, doors, windows etc. Based on these descriptions we build the house. House is the object. As many houses can be made from a house's blueprint, we can create many objects from a class. An object is also called an instance of a class and the process of creating this object is called instantiation.
 
+Say that you want to create a class to describe a router. The first thing you have to do is define it. In Python, you define a class by using the class keyword, giving the class a name, and then closing with a colon. **Pep8 recommends capitalizing a class name to differentiate it from a variable**. 
+```
+class Router:
+  '''Router Class'''
+  def __init__(self, model, swversion, ip_add):
+    '''initialize values'''
+    self.model = model
+    self.swversion = swversion
+    self.ip_add = ip_add
+
+rtr1 = Router('iosV', '15.6.7', '10.10.10.1')
+```
+
+After defining the class, you add a docstring to document what the class is for and then you **create a function that calls __init__, which is a special case that is used for the setup of the class.** (In __init__, the double underscores are called dunder or magic methods.) **Class functions that begin with double underscore __ are called special functions as they have special meaning.** **Functions that are within the class are called methods and become actions that you can perform on the object you are creating.**
+
+To store attributes, you map the name **self** and the values you pass to it become variables inside the object, which then store those values as attributes. This is because, whenever an object calls its method, the object itself is passed as the first argument. In general, calling a method with a list of n arguments is equivalent to calling the corresponding function with an argument list that is created by inserting the method's object before the first argument. For these reasons, the first argument of the function in class must be the object itself. This is conventionally called self. It can be named otherwise but we highly recommend to follow the convention.
+The last bit of code instantiates the object itself. Up until now, you have been creating a template, and by assigning data to the variables within the class, you have been telling Python to build the object. Now you can access any of the stored attributes of the class by using dot notation, as shown here:
+```
+print(rtr1.model)
+'iosV'
+```
+**When you call rtr1.model, the interpreter displays the value assigned to the variable model within the object.**
+
+You can also create more attributes that aren�t defined during initialization and that shows how flexible objects are, but you typically want to define any attributes as part of a class to automate object creation instead of manually assigning values. When building a class, you can instantiate as many objects as you want by just providing a new variable and passing over some data.
+```
+rtr1.desc = 'virtual router'
+
+print(rtr1.desc)
+'virtual router'
+```
+
+## Methods
 
 ## Modules
