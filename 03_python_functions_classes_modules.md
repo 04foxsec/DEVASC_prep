@@ -147,4 +147,90 @@ print(rtr1.desc)
 
 ## Methods
 
+Attributes describe an object, and **methods allow you to interact with an object. Methods are functions you define as part of a class**  A method that allows you to see the details hidden within an object without typing a bunch of commands over and over would be a useful method to add to a class. Building on the previous example, a new function called getdesc() to format and print the key attributes of your router. Notice that you pass self to this function only, as self can access the attributes applied during initialization.
+```
+class Router:
+    '''Router Class'''
+    def __init__(self, model, swversion, ip_add):
+     '''initialize values'''
+     self.model = model
+     self.swversion = swversion
+     self.ip_add = ip_add
+  def getdesc(self):
+    '''return a formatted description of the router'''
+    desc = f'Router Model  :{self.model}\n'\
+    f'Software Version   :{self.swversion}\n'\
+    f'Router Management Address:{self.ip_add}'
+    return desc
+...
+rtr1 = Router('iosV', '15.6.7', '10.10.10.1')
+rtr2 = Router('isr4221', '16.9.5', '10.10.10.5')
+...
+print('Rtr1\n', rtr1.getdesc(), '\n', sep='')
+
+Rtr1
+Router Model  :iosV
+Software Version  :15.6.7
+Router Management Address:10.10.10.1
+...
+print('Rtr2\n', rtr2.getdesc(), sep='')
+
+Rtr2
+Router Model  :isr4221
+Software Version   :16.9.5
+Router Management Address:10.10.10.5
+```
+### Inheritance 
+
+**Inheritance in Python classes allows a child class to take on attributes and methods of another class**. In the previous example we created a class for routers, but what about switches? If you look at the Router class, you see that all of the attributes apply to a switch as well, so why not reuse the code already written for a new Switch class? The only part of the code that wouldn't work for a switch is the getdesc() method, which prints information about a router. **When you use inheritance, you can replace methods and attributes that need to be different.** To inherit in a class, you create the class as shown earlier in this chapter, but before the colon, you add parentheses that include the class from which you want to pull attributes and methods. It is important to note that the parent class must come before the child class in the Python code. Example 4-2 shows how this works, creating a second class named Switch, using the Router class as parent. In addition, it creates a different getdesc() method that prints text about a switch rather than about a router.
+```
+!!same as the code before!! class Router:
+...
+class Switch(Router):
+   def getdesc(self):
+     '''return a formatted description of the switch'''
+     desc = (f'Switch Model  :{self.model}\n'
+     f'Software Version  :{self.swversion}\n'
+     f'Switch Management Address:{self.ip_add}')
+ return desc
+...
+sw1 = Switch('Cat9300', '16.9.5', '10.10.10.8')
+...
+print('Sw1\n', sw1.getdesc(), '\n', sep='')
+
+Sw1
+Switch Model  :Cat9300
+Software Version  :16.9.5
+Switch Management Address:10.10.10.8
+```
+To learn more about classes, methods, and inheritance, you can refer to the Python documentation. (https://docs.python.org/3/tutorial/classes.html)
+
 ## Modules
+
+A central goal of OOP is to allow you to build modular software that breaks code up into smaller, easier-to-understand pieces. If you are going to break up your code into functions and classes, you can also separate that code into smaller chunks that hold key structures and classes and allow them to be physically moved into other files, called modules, that can be included in your main Python code with the import statement. Creating modular code provides the following benefits:
+
+- **Easier readability/maintainability:** Code written in a modular fashion is inherently easier to read and follow. It�s like chapters in a book providing groupings of similar concepts and topics. Even the best programmers struggle to understand line after line of code, and modularity makes maintaining and modifying code much easier.
+- **Low coupling/high cohesion:** Modular code should be written in such a way that modules do not have interdependencies. Each module should be self-contained so that changes to one module do not affect other modules or code. In addition, a module should only include functions and capabilities related to what the module is supposed to do. When you spread your code around multiple modules, bouncing back and forth, it is really difficult to follow. This paradigm is called low coupling/high cohesion modular design.
+- **Code reusability:** Modules allow for easy reusability of your code, which saves you time and makes it possible to share useful code.
+- **Collaboration:** You often need to work with others as you build functional code for an organization. Being able to split up the work and have different people work on different modules speeds up the code-production process.
+
+There are a few different ways you can use modules in Python. 
+- The first and easiest way is to  install one of thousands of third-party modules by using **pip**. Much of the functionality you might need or think of has probably already been written, and using modules that are already available can save you a lot of time. 
+- Another way to use modules is to simply writing some code in your editor, giving the file a name, and appending a .py extension. Using your own custom modules does add a bit of processing overhead to your application, as Python is an interpreted language and has to convert your text into machine-readable instructions on the fly. 
+- Finally, you can program a module in the C language, compile it. Compared to writing your own modules in Python, this method results in faster runtime for your code, but it is a lot more work. Many of the third-party modules and those included as part of the standard library in Python are built this way.
+
+### Importing a Module
+
+All modules are accessed the same way in Python: by using the **import** command. Within a program by convention at the very beginning of the code add ```import <module name>``` 
+```
+>>> import math
+>>> dir(math)
+['__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__', 'acos', 'acosh', 'asin', 'asinh', 'atan', 'atan2',
+'atanh', 'ceil', 'comb', 'copysign', 'cos', 'cosh', 'degrees','dist', 'e', 'erf', 'erfc', 'exp', 'expm1', 'fabs', 'factorial',
+'floor', 'fmod', 'frexp', 'fsum', 'gamma', 'gcd', 'hypot', 'inf','isclose', 'isfinite', 'isinf', 'isnan', 'isqrt', 'ldexp', 'lgam-ma',
+'log', 'log10', 'log1p', 'log2', 'modf', 'nan', 'perm', 'pi','pow', 'prod', 'radians', 'remainder', 'sin', 'sinh', 'sqrt','tan', 'tanh', 'tau', 'trunc'\]
+```
+After you import a module, you can use the **dir() function to get a list of all the methods available as part of the module.** The ones in the beginning with the __ are internal to Python and are not generally useful in your programs. All the others, however, are functions that are now available for your program to access. You can use the help() function to get more details and read the documentation on the math module.
+
+
+
