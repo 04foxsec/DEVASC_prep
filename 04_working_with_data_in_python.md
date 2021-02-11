@@ -57,9 +57,25 @@ Imagine a world where all the data is in nice, neatly formatted cells, completel
 
 ### [CSV (comma-separated values)](https://en.wikipedia.org/wiki/Comma-separated_values)
 **A CSV file is just a plaintext spreadsheet or database file.** All of those spreadsheets or databases that you have with infrastructure information can be easily exported as CSV files so that you can use them as source data in Python. Each line in a CSV file represents a row, and commas are used to separate the individual data fields to make it easier to parse the data. Python has a built-in CSV module that you can import that understands the CSV format and simplifies your code.
+```
+"router1","192.168.10.1","Nashville"
+"router2","192.168.20.1","Tampa"
+"router3","192.168.30.1","San Jose"
+```
+To start working with this data, you have to **import the CSV module**, and then you need to **create a reader object** to read your CSV file into. **You first have to read the file into a file handle, and then you run the CSV read function on it and pass the results on to a reader object.** From there, you can begin to use the CSV data as you wish.
+```
+import csv
+csvfile=open("data.csv") #open csv
+csvreader = csv.reader(csvfile) #read the csv data
+csvdata = list(csvreader) #make a list from the data
+print(csvdata)
+...
+[['router1', '192.168.10.1', 'Nashville'],['router2','192.168.20.1', 'Tampa'], ['router3', '192.168.30.1', 'San Jose ']]
 
-
-
+print(csvdata[0])
+...
+['router1', '192.168.10.1', 'Nashville']
+```
 
 
 ### JSON
