@@ -6,7 +6,7 @@ There are numerous ways to ingest data into a Python program. You can get input 
 
 Pulling data from a file in Python is very straightforward. To extract data from a text file, you can use native Python capabilities. Binary files, on the other hand, need to be processed by some module or another external program before it is possible to extract the data from them. 
 
-From Python's perspective, a text file can be thought of as a sequence of lines. Each line, as it is read in to Python, is typically 79 characters long [(per PEP 8 convention)] (https://www.python.org/dev/peps/pep-0008/), with a newline character at the end (\n for Python). There are just two functions that you need to know when working with a text file: **open()** and **close()**.
+From Python's perspective, a text file can be thought of as a sequence of lines. Each line, as it is read in to Python, is typically 79 characters long [(per PEP 8 convention)](https://www.python.org/dev/peps/pep-0008/), with a newline character at the end (\n for Python). There are just two functions that you need to know when working with a text file: **open()** and **close()**.
 
 ### Open
 
