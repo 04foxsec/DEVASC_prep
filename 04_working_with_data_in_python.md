@@ -77,8 +77,36 @@ print(csvdata[0])
 ['router1', '192.168.10.1', 'Nashville']
 ```
 
+TBC
 
-### JSON
+### JavaScript Object Notation (JSON)
+JavaScript Object Notation (JSON) is a data structure that is derived from the Java programming language, but it can be used as a portable data structure for any programming language. **It was built to be an easily readable and standard way for transporting data back and forth between applications**. JSON is heavily used in web services and is one of the core data formats you need to know how to use in order to interact with Cisco infrastructure. The data structure is built around key/value pairs that simplify mapping of data and its retrieval.
+```
+{
+  "interface": {
+     "name": "GigabitEthernet1",
+     "description": "Router Uplink",
+     "enabled": true,
+     "ipv4": {
+       "address": [
+           {"ip": "192.168.1.1",
+            "netmask": "255.255.255.0"}
+            ]
+      }
+    }
+}
+```
+You can see the structure that JSON provides. **interface** is the main data object, and you can see that its value is multiple key/value pairs. This nesting capability allows you to structure very sophisticated data models. Notice how similar to a Python dictionary the data looks. **You can easily convert JSON to lists (for a JSON array) and dictionaries (for JSON objects) with the built-in JSON module.** There are four functions that you work with to perform the conversion of JSON data into Python objects and back.
+
+|Function| Description|
+|--------|------------|
+|load():| This allows you to import native JSON and convert it to a Python dictionary from a file.|
+|loads():| This will import JSON data from a string for parsing and manipulating within your program.|
+|dump():| This is used to write JSON data from Python objects to a file.|
+|dumps():| This allows you to take JSON dictionary data and convert it into a serialized string for parsing and manipulating within Python.|
+
+The **s at the end of dump and load refers to a string**, as in dump string. To see this in action, you load the JSON file and map the file handle to a Python object (data)
+
 ### XML
 ### YAML
 ## Error handling
