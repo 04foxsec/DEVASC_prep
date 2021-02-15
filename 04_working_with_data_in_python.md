@@ -106,8 +106,70 @@ You can see the structure that JSON provides. **interface** is the main data obj
 |dumps():| This allows you to take JSON dictionary data and convert it into a serialized string for parsing and manipulating within Python.|
 
 The **s at the end of dump and load refers to a string**, as in dump string. To see this in action, you load the JSON file and map the file handle to a Python object (data)
+```
+import json
+with open("json_sample.json") as data:
+  json_data = data.read()
+json_dict = json.loads(json_data)
+```
+The object json_dict has taken the output of json.loads(json_data) and now holds the json object as a Python dictionary:
+```
+print(type(json_dict))
+...
+<class 'dict'>
+...
+print(json_dict)
+...
+{'interface': {'name': 'GigabitEthernet1', 'description':'Router Uplink', 'enabled': True, 'ipv4': {'address':[{'ip': '192.168.0.2', 'netmask': '255.255.255.0'}]}}}
+```
+You can now modify any of the key/value pairs, as in this example, where the description is changed:
+```
+json_dict["interface"]["description"] = "Backup Link"
+print(json_dict)
+...
+{'interface': {'name': 'GigabitEthernet1', 'description': 'Backup Link', 'enabled': True, 'ipv4': {'address': [{'ip': '192.168.0.2','netmask': '255.255.255.0'}]}}}
+```
 
-### XML
+In order **to save the new json object back to a file, you have to use the dump() function (without the s)** to convert the Python dictionary back into a JSON file object. To make it easier to read you can add the **indent** keyword with a number for the indentation.
+```
+with open("json_sample.json", "w") as filehandler:
+  json.dump(json_dict, filehandler, indent = 4)
+```
+Loading the JSON File and Printing the Output to the Screen
+``` 
+with open ("json_sample.json") as data:
+  json_data = data.read()
+  print(json_data)
+...
+{
+  "interface": {
+    "name": "GigabitEthernet1",
+      "description": "Backup Link",
+      "enabled": true,
+      "ipv4": {
+        "address": [
+            {
+             "ip": "192.168.0.2",
+             "netmask": "255.255.255.0"
+             }
+          ]
+        }
+    }
+}
+```
+
+### Extensible Markup Language (XML)
+Extensible Markup Language (XML) is a very common data format that is used heavily in configuration automation. Parsing XML is similar to using other data formats, in that Python natively understands and can support XML encoding and decoding. 
+```
+<device>
+  <Hostname>Rtr01</Hostname>
+  <IPv4>192.168.1.5</IP4>
+  <IPv6> </IPv6>
+</device>
+```
+It should come as no surprise that **XML looks a bit like HTML syntax;** it was designed to work hand-in-hand with HTML for data transport and storage between web services and APIs. **XML has a tree structure, with the root element being at the very top**. There is a parent/child relationship between elements. In the preceding example, device is the root element that has Hostname, IPv4, and IPv6 as child elements. Just like with HTML, a tag has meaning and is used to enclose the relationships of the elements with a start tag (<>)and a closing tag (</>). It's not all that different from JSON in that a tag acts as a key with a value. You can also assign attributes to a tag.
+
+
 ### YAML
 ## Error handling
 ## Test-Driven Development
