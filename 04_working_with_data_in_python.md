@@ -315,5 +315,96 @@ Testing your software is not optional. Every script and application that you cre
 
 **A unit test is a type of test that is conducted on small, functional aspects of code. It's the lowest level of software testing and is interested in the logic and operation of only a single function in your code.** That's not to say that you can't perform multiple tests at the same time. Computers are great at performing repetitive tasks, but the goal is for each test to be on one function at a time so that the testing is specific and consistent. 
 
+
 There are other types of testing that you may hear about, such as integration testing and functional testing. The differences between these types of testing and unit testing come down to the scope of the test. As mentioned, a **unit test is testing a small piece of code**, such as a method or function. An **integration test, on the other hand, tests how one software component works with the rest of the application.** It is often used when modules of an application are developed by separate teams or when a distributed application has multiple components working together. A **functional test (also called an end-to-end test) is the broadest in scope from a testing perspective. This is where the entire system is tested against** the functional specifications and requirements of the software application.
 
+**Python has a built-in unit test module, named unittest**. This module is quite full featured and can support a tremendous number of test cases. There are other testing modules that you can use, such as Nose and PyTest (who comes up with these names?), but for the purposes of the 200-901 DevNet Associate DEVASC exam, you need to know how unittest works. In order to use unittest, you need a bit of code to test. 
+```
+from math import pi
+def area_of_circle(r):
+  return pi*(r**2)
+```
+The function computes the radius of a circle and returns the value. This is very simple, but what happens if the function is called, and odd values are passed to it? You guessed it: lots of errors. So in order to test this function, you can create a unit test.
+
+Certain conventions must be followed for a unit test. While you can create a unit test that has the code that you want to test all in the same file, it's a better idea to use object-oriented principles when building tests. In this case, the function you want to test is saved as areacircle.py, so following good practices you should name your unit test file test_areacircle.py. This makes it easy to differentiate the two. You should also import the unittest module, and from areacircle you can import the area_of_circle function. 
+```
+import unittest
+from areacircle import area_of_circle
+from math import pi
+```
+
+Next, you need to create a class for your test. You can name it whatever you want, but you need to inherit unittest.TestCase from the unittest module. This is what enables the test function methods to be assigned to your test class. Next, you can define your first test function. In this case, you can test various inputs to validate that the math in your function under test is working as it should. You will notice a new method called assertAlmostEqual(), which takes the function you are testing, passes a value to it, and checks the returned value against an expected value. You can add a number of tests to this function. This is what the test now looks like with the additional code:
+```
+class Test_Area_of_Circle_input(unittest.TestCase):
+  def test_area(self):
+    # Test radius >= 0
+    self.assertAlmostEqual(area_of_circle(1), pi)
+    self.assertAlmostEqual(area_of_circle(0), 0)
+    self.assertAlmostEqual(area_of_circle(3.5), pi * 3.5**2)
+
+if __name__ == '__main__':
+  unittest.main()
+```
+All this last two lines does is check to see if the script is being run directly **(because the __main__ special case is an attribute for all Python scripts** run from the command line) and call the unittest.main() function. After executing the function, you should see the following results:
+
+```
+.
+-------------------------------------------------------------------
+Ran 1 test in 0.000s
+OK
+```
+
+The dot at the top shows that 1 test ran (even though you had multiple checks in the same function) to determine whether the values submitted produced an error. Since all are valid for the function, the unit test came back successfully.
+
+Now you can check to see if a negative number causes a problem. Create a new function under your previous test_area function. Name this function test_values. (The test at the beginning is required, or unittest will ignore the function and not check it.) You can use the **assertRaises check, which will be looking for a ValueError exception** for the function area_of_circle, and pass it a value of -1. The following function can be added to your code:
+```
+def test_values(self):
+    # Test that bad values are caught
+    self.assertRaises(ValueError, area_of_circle, -1)
+
+...
+.F
+=========================================
+FAIL: test_values (__main__.Test_Area_of_Circle_input)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/chrijack/Documents/ccnadevnet/test_areacircle.py", line 14, in
+  test_values
+    self.assertRaises(ValueError, area_of_circle, -1)
+AssertionError: ValueError not raised by area_of_circle
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+FAILED (failures=1)
+```
+The first check is still good, so you see one dot at the top, but next to it is a big F for fail. You get a message saying that the test_value function is where it failed, and see that your original function did not catch this error. This means that the code is giving bad results. A radius of -1 is not possible. 
+
+To fix this, you go back to your original function and some error-checking code. You use a simple if statement to check for a negative number, and you raise a ValueError with a message to the user about invalid input:
+
+```
+from math import pi
+def area_of_circle(r):
+  if r < 0:
+    raise ValueError('Negative radius value error')
+  return pi*(r**2)
+```
+Now when you try the test from the interpreter, you see an error raised:
+```
+Traceback (most recent call last):
+
+� File "<pyshell>", line 1, in <module>
+� File "/Users/chrijack/Documents/ccnadevnet/areacircle.py",
+� line 5, in area_of_circle
+
+��� raise ValueError('Negative radius value error')
+ValueError: Negative radius value error
+```
+If you rerun the unit test, you see that it now passes the new check because an error is raised:
+
+```
+..
+-------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+```
+This simple example barely scratches the surface of how you can use unit testing to check your software, but it does show you how a unit test is constructed and, more importantly, what it does to help you construct resilient code. Many more tests can be conducted; see the documentation at (https://docs.python.org/3/library/unittest.html).
