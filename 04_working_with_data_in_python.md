@@ -269,5 +269,51 @@ with open("yaml_sample.yaml", "w") as data:
   data.write(yaml.dump(yaml_dict, default_flow_style=False))
 ```
 ## Error handling
+Whenever you are working with code, errors are bound to happen. In Python, **errors often halt the execution of code**, and the interpreter spits out some type of cryptic message. What if you wanted Python to tell the users what they did wrong and let them try again or perform some other task to recover from the error? That's where the **try-except-else-finally code blocks** come into play.
+
+You have seen quite a bit of file access in this chapter. What happens if you ask the user for the filename instead of hard-coding it? If you did this, you would run the risk of a typo halting your program. In order to add some error handling to your code, you can use the try statement. Example 5-8 shows an example of how this works.
+
+```
+x = 0
+while True:
+try:
+  filename = input("Which file would you like to open? :")
+  with open(filename, "r") as fh:
+    file_data = fh.read()
+except FileNotFoundError:
+  print(f'Sorry, {filename} doesn't exist! Please try again.')
+else:
+  print(file_data)
+  x=0
+  break
+finally:
+  x += 1
+  if x == 3:
+    print('Wrong filename 3 times.\nCheck name and Rerun.')
+```
+
+In this example, a variable keeps track of the number of times the while loop will be run. This is useful for building in some logic to make sure the program doesn't drive the users crazy by constantly asking them to enter a filename. Next is an infinite while loop that uses the fact that the Boolean True will always result in continuing looping through the code. Next is the **try statement, which contains the block of code you want to subject to error handling.** You ask the user to enter a filename to open, and it is stored in the filename variable. This variable is used with open() to open a read-only text file and use the file handle object fh. The file handle object uses read() to store the text file in the file_data variable. **If Python can't find the file specified, the except FileNotFoundError block of code is executed,** printing an error message with the file's name and informing the user to try again. The **else block runs only if an exception does not occur and the filename can be found.** The file_data is printed, x is set to 0 (to empty the counter), the loop is stopped, and the finally block is run. The **finally block runs regardless of whether an exception occurs each time through the loop.** The x variable is incremented each time through the loop, and if the user gets the wrong filename three times, a message is printed, saying the user tried three times and to check the file. At this point, the loop is broken, and the script is halted.
+
+
+There are quite a few other error-handling capabilities available in Python, and if you want to try to make your applications more user friendly, it would be worth your time to explore them. The latest documentation can be found at (https://docs.python.org/3/tutorial/errors.html). This documentation discusses custom errors and provides more examples of types of errors you can use with the previous sample code.
+
 ## Test-Driven Development
+**Test-driven development (TDD) is an interesting concept that at first glance may seem completely backward. The idea is that you build a test case first, before any software has been created or modified.** The goal is to streamline the development process by focusing on only making changes or adding code that satisfies the goal of the test. In normal testing, you test after the software is written, which means you spend your time chasing errors and bugs more than writing code. By writing the test first, you spend your time focused on writing only what is needed and making your code simple, easier to understand, and hopefully bug free. 
+
+The following are the five steps of TDD:
+
+- Step 1. **Write a test**: Write a test that tests for the new class or function that you want to add to your code. Think about the class name and structure you will need in order to call the new capability that doesn't exist yet and nothing more.
+- Step 2. **Test fails**: Of course, the test fails because you haven't written the part that works yet. The idea here is to think about the class or function you want and test for its intended output. This initial test failure shows you exactly where you should focus your code writing to get it to pass. This is like starting with your end state in mind, which is the most effective way to accomplish a goal.
+- Step 3. **Write some code**: Write only the code needed to make the new function or class successfully pass. This is about efficiency and focus.
+- Step 4. **Test passes**: The test now passes, and the code works.
+- Step 5. **Refactor**: Clean up the code as necessary, removing any test stubs or hard-coded variables used in testing. Refine the code, if needed, for speed.
+
+TDD may see like a waste of time initially. Why write tests for stuff you know isn't going to pass? Isn't all of this testing just wasted effort? The benefit of this style of development is that it starts with the end goal in mind, by defining success right away. The test you create is laser focused on the application's purpose and a clear outcome. Many programmers add too much to their code by trying to anticipate future needs or building in too much complexity for an otherwise simple problem. TDD works extremely well with the iterative nature of Agile development, with the side benefit of having plenty of test cases to show that the software works.
+
 ## Unit test
+Testing your software is not optional. Every script and application that you create have to go through testing of some sort.  While this is software testing, it's not structured and often is not repeatable. Did you test all options? Did you validate your expectations? What happens if you send unexpected input to a function? These are some of the reasons using a structured and automated testing methodology is crucial to creating resilient software.
+
+**A unit test is a type of test that is conducted on small, functional aspects of code. It's the lowest level of software testing and is interested in the logic and operation of only a single function in your code.** That's not to say that you can't perform multiple tests at the same time. Computers are great at performing repetitive tasks, but the goal is for each test to be on one function at a time so that the testing is specific and consistent. 
+
+There are other types of testing that you may hear about, such as integration testing and functional testing. The differences between these types of testing and unit testing come down to the scope of the test. As mentioned, a **unit test is testing a small piece of code**, such as a method or function. An **integration test, on the other hand, tests how one software component works with the rest of the application.** It is often used when modules of an application are developed by separate teams or when a distributed application has multiple components working together. A **functional test (also called an end-to-end test) is the broadest in scope from a testing perspective. This is where the entire system is tested against** the functional specifications and requirements of the software application.
+
