@@ -10,8 +10,8 @@ Topics from Cert Gude:
   2.1 [Data types](https://github.com/04foxsec/DEVASC_prep/blob/main/02_python_data_types.md)
 3. [Python Functions, Classes, and Modules](https://github.com/04foxsec/DEVASC_prep/blob/main/02_python_functions_classes_modules.md)
 4. [Working with Data in Python](https://github.com/04foxsec/DEVASC_prep/blob/main/04_working_with_data_in_python.md)
-5. Application Programming Interfaces (APIs)
-6. RESTful API Requests and Responses
+5. [Application Programming Interfaces (APIs)](https://github.com/04foxsec/DEVASC_prep/blob/main/05_Application_Programming_Interfaces.md)
+6. [RESTful API Requests and Responses](https://github.com/04foxsec/DEVASC_prep/blob/main/06_RESTful_API.md)
 7. Cisco Enterprise Networking Management Platforms and APIs
 8. Cisco Data Center and Compute Management Platforms and APIs
 9. Cisco Collaboration Platforms and APIs
