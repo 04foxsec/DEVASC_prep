@@ -213,4 +213,109 @@ Versioning is a crucial part of API design. It gives developers the ability to i
 - **Custom headers:** REST APIs are versioned by providing custom headers with the version number included as an attribute. The main difference between this approach and the two previous ones is that it doesn't clutter the URI with versioning information.
 - **Content negotiation:** This strategy allows you to version a single resource representation instead of versioning an entire API, which means it gives you more granular control over versioning. Another advantage of this approach is that it doesn't require you to implement URI routing rules, which are introduced by versioning through the URI path.
 
+### Pagination
+
+When a request is made to get a list, it is almost never a good idea to return all resources at once. This is where a pagination mechanism comes into play. There are two popular approaches to pagination:
+
+- Offset-based pagination
+- Keyset-based pagination, also known as continuation token or cursor pagination (recommended)
+
+A really simple approach to offset-based pagination is to use the parameters offset and limit, which are well known from databases. Query parameters are passed in the URI in order to get data based on offset and to limit the number of results returned.
+
+```# returns the devices between 100-115```
+
+Usually if the parameters are not specified, the default values are used. Never return all resources. One rule of thumb is to model the limit based on the design of your store retrieval performance.
+
+```# returns the devices 0 to 200```
+
+Note that the data returned by the service usually has links to the next and the previous pages.
+```
+GET /devices?offset=100&limit=10
+
+{
+"pagination": {
+      "offset": 100,
+      "limit": 10,
+      "total": 220,
+   },
+   "device": [
+   //...
+   ],
+  "links": {
+     "next": "http://myhouse.cisco.com/devices?offset=110&limit=10",
+     "prev": "http://myhouse.cisco.com/devices?offset=90&limit=10"
+  }
+}
+```
+### Rate Limiting and Monetization
+
+Rate limiting is an essential REST API design method for developers. Rate-limiting techniques are used to increase security, business impact, and efficiency across the board or end to end. Let's look at how rate limiting helps with each of them:
+
+- **Security**: Allowing unlimited access to your API is essentially like handing over the master key to a house and all the rooms therein. While it's great when people want to use your API and find it useful, open access can decrease value and limit business success. Rate limiting is a critical component of an API's scalability. Processing limits are typically measured in transactions per second (TPS). If a user sends too many requests, API rate limiting can throttle client connections instead of disconnecting them immediately. Throttling enables clients to keep using your services while still protecting your API. Finally, keep in mind that there is always a risk of API requests timing out, and the open connections also increase the risk of DDoS attacks. (DDoS stands for distributed denial of service. A DDoS attack consists of a website being flooded by requests during a short period of time, with the aim of overwhelming the site and causing it to crash.)
+- **Business impact**: One approach to API rate limiting is to offer a free tier and a premium tier, with different limits for each tier. Limits could be in terms of sessions or in terms of number of APIs per day or per month. There are many factors to consider when deciding what to charge for premium API access. API providers need to consider the following when setting up API rate limits:
+  - Are requests throttled when they exceed the limit?
+  - Do new calls and requests incur additional fees?
+  - Do new calls and requests receive a particular error code and, if so, which one?
+- **Efficiency**: Unregulated API requests usually and eventually lead to slow page load times for websites. Not only does this leave customers with an unfavorable opinion but it can lower your service rankings.
+
+Rate Limiting on the Client Side
+
+As discussed in the previous section, various rate-limiting factors can be deployed on the server side. As a good programming practice, if you are writing client-side code, you should consider the following:
+
+- Avoid constant polling by using webhooks to trigger updates.
+- Cache your own data when you need to store specialized values or rapidly review very large data sets.
+- Query with special filters to avoid re-polling unmodified data.
+- Download data during off-peak hours.
+
 ## REST Tools
+Understanding and testing REST API architecture when engaging in software development is crucial for any development process. The following sections explore a few of the most commonly used tools in REST API testing and how to use some of their most important features. Based on this information, you will get a better idea of how to determine which one suits a particular development process the best.
+
+### Postman
+One of the most intuitive and popular HTTP clients is a tool called Postman (https://www.getpostman.com/downloads/). It has a very simple user interface and is very easy to use.
+
+- Sending simple GETs and POSTs
+- Creating and executing collections (to group together requests and run those requests in a predetermined sequence)
+- Writing tests (scripting requests with the use of dynamic variables, passing data between requests, and so on)
+- Chaining, which allows you to use the output of response as an input to another request
+- Generating simple code samples in multiple programming languages
+- Importing and executing collections created by the community
+
+Getting started with Postman [LINK](https://learning.postman.com/docs/getting-started/introduction/)
+
+### curl
+
+curl is an extensive command-line tool that can be downloaded from https://curl.haxx.se. curl can be used on just about any platform on any hardware that exists today. Regardless of what you are running and where, the most basic curl commands just work.
+
+With curl, you commonly use a couple of different command-line options:
+
+- -d: This option allows you to pass data to the remote server. You can either embed the data in the command or pass the data using a file.
+- -H: This option allows you to add an HTTP header to the request.
+- -insecure: This option tells curl to ignore HTTPS certificate validation.
+- -c: This option stores data received by the server. You can reuse this data in subsequent commands with the -b option.
+- -b: This option allows you to pass cookie data.
+- -X: This option allows you to specify the HTTP method, which normally defaults to GET.
+
+More in curl: [LINK](https://curl.se/docs/httpscripting.html)
+
+### HTTPie
+
+HTTPie is a modern, user-friendly, and cross-platform command-line HTTP client written in Python. It is designed to make CLI interaction with web services easy and user friendly. Its simple HTTP commands enable users to send HTTP requests using intuitive syntax. HTTPie is used primarily for testing, trouble-free debugging, and interacting with HTTP servers, web services, and RESTful APIs. For further information on HTTPie documentation, downloading, and installation, see https://httpie.org/doc:
+
+- HTTPie comes with an intuitive UI and supports JSON.
+- It uses expressive and intuitive command syntax.
+- HTTPie allows for syntax highlighting, formatting, and colorized terminal output.
+- HTTPie allows you to use HTTPS, proxies, and authentication.
+- It provides support for forms and file uploads.
+- It provides support for arbitrary request data and headers.
+- It enables Wget-like downloads and extensions.
+
+### Python Requests
+
+Requests is a Python module that you can use to send HTTP requests. It is an easy-to-use library with a lot of possibilities ranging from passing parameters in URLs to sending custom headers and SSL verification. The Requests library is a very handy tool you can use whenever you programmatically start using any APIs. Here you will see how to use this library to send simple HTTP requests in Python as way to illustrate its ease of use.
+
+More on requests module: [LINK](https://realpython.com/python-requests/)
+
+### REST API Debugging Tools for Developing APIs
+
+As you start playing with RESTful APIs, you are bound to encounter errors. You can use several techniques to determine the nature of a problem. RESTful APIs use several mechanisms to indicate the results of REST calls and errors that occur during processing. You can use these methods to start your debugging journey for a RESTful application. Usually the error code returned is the biggest hint you can receive. Once you have this information, you can use tools like Postman and curl to make simple API calls and see the sent and response headers. In addition, other tools that are built in to web browsers can allow you to see traces and do other types of debugging. Most browsers include some type of developer tools, such as Safari's Web Development Tools, Chrome's DevTools, and Firefox's Developer Tools. Such tools are included with browsers by default and enable you to inspect API calls quickly. Finally, if you plan on building your own test environment or sandbox, you might want to use tools like Simple JSON Server (an open-source server that you can clone and run in your environment for playing with and learning about RESTful APIs).
+
