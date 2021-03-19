@@ -29,6 +29,14 @@ From a programmability perspective, the Meraki cloud platform provides several A
   - Onboarding and decommissioning of clients
   - Building custom dashboards and applications
 
+Get access to the Dashboard API: Cisco Meraki dashboard at https://dashboard.meraki.com  Organization > Settings. From there, at the bottom Enable Access. Once you have enabled the API, select your username at the top-right corner of the web page and select My Profile. In your profile, scroll down and locate the section named Dashboard API Access and select Generate New API Key. The API key you generate is associated with your account. You can generate, revoke, and regenerate your API key in your profile. Make sure you copy and store your API key in a safe place.
+
+Every Dashboard API request must specify an API key within the request header. If a missing or incorrect API key is specified, the API returns a 404 HTTP error message. 
+The key for the authentication request header is **X-Cisco-Meraki-API-Key**, and the value is the API key you obtained previously. In order to mitigate abuse and denial-of-service attacks, the Cisco Meraki Dashboard API is limited to 5 API calls per second per organization. In the first second, a burst of an additional 5 calls is allowed, for a maximum of 15 API calls in the first 2 seconds per organization. If the rate limit has been exceeded, an error message with HTTP status code 429 is returned. The rate-limiting technique that the Dashboard API implements is based on the token bucket model. 
+
+The Cisco Meraki Dashboard API uses the base URL **https://api.meraki.com/api/v0**. Keep in mind that the API will evolve, and different versions will likely be available in the future. Always check the API documentation for the latest information on all Cisco APIs, including the Meraki APIs, at https://developer.cisco.com.
+
+
 
 # Cisco DNA Center: 
 This section covers Cisco DNA Center and the REST APIs that it publicly exposes.
