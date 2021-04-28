@@ -218,7 +218,96 @@ print('-'*95)
 ```
 First, this example imports the api class from dnacentersdk. Next, it instantiates the api class and creates a connection to the always-on Cisco DevNet Sandbox DNA Center instance and stores the result of that connection in a variable called DNAC. If the connection was successfully established, the DNAC object has all the API endpoints mapped to methods that are available for consumption. DNAC.devices.get_device_list() provides a list of all the devices in the network and stores the result in the DEVICES dictionary. The same logic applies to the client health status. DNAC.clients.get_overall_client_health(timestamp='1566506489000') returns a dictionary of health statuses for all the clients at that specific time, which translates to Thursday, August 22, 2019 8:41:29 PM GMT. When the data is extracted from the API and stored in the variables named DEVICES for all the network devices and CLIENTS for all the client health statuses, a rudimentary table is displayed in the console, with select information from both dictionaries. For the DEVICES variable, only the device name, device type, and device uptime are displayed, and for the CLIENTS variable, only the client health category, number of clients, and client score for each category are displayed.
 
-
-
 # Cisco SD-WAN: 
-This section covers Cisco SD-WAN and the REST APIs exposed through Cisco vManage.
+Cisco SD-WAN (Software-Defined Wide Area Network) is a cloud-first architecture for deploying WAN connectivity. Wide-area networks have been deployed for a long time, and many lessons and best practices have been learned throughout the years. Applying all these lessons to software-defined networking (SDN) resulted in the creation of Cisco SD-WAN. An important feature of SDN is the separation of the control plane from the data plane. The control plane includes a set of protocols and features that a network device implements so that it can determine which network path to use to forward data traffic.(The data plane includes the protocols and features that a network device implements to forward traffic to its destination as quickly as possible.)
+
+SDN separates the functionality of the control plane and data plane in different devices, and several benefits result. 
+- First, the cost of the resulting network should be lower as not all network devices have to implement expensive software and hardware features to accommodate both a control plane and data plane.
+- Second, the convergence of this new network, which is the amount of time it takes for all devices to agree on a consistent view of the network.
+
+Cisco currently has two SD-WAN offerings. The first one, based on the Viptela acquisition, is called Cisco SD-WAN; the second one, based on the Meraki acquisition, is called Meraki SD-WAN. 
+
+- **vManage:** Cisco vManage is a centralized network management system that provides a GUI and REST API interface to the SD-WAN fabric. You can easily manage, monitor, and configure all Cisco SD-WAN components through this single pane of glass.
+- **vSmart:** Cisco vSmart is the brains of the centralized control plane for the overlay SD-WAN network. It maintains a centralized routing table and centralized routing policy that it propagates to all the network Edge devices through permanent DTLS tunnels.
+- **vBond:** Cisco vBond is the orchestrator of the fabric. It authenticates the vSmart controllers and the vEdge devices and coordinates connectivity between them. The vBond orchestrator is the only component in the SD-WAN fabric that needs public IP reachability to ensure that all devices can connect to it.
+- **vEdge:** Cisco vEdge routers, as the name implies, are Edge devices that are located at the perimeter of the fabric, such as in remote offices, data centers, branches, and campuses. They represent the data plane and bring the whole fabric together and route traffic to and from their site across the overlay network.
+
+All the components of the Cisco SD-WAN fabric run as virtual appliances, and the vEdges are also available as hardware routers. Separating the WAN fabric this way makes it more scalable, faster to converge, and cheaper to deploy and maintain. On top of a transport-independent underlay that supports all types of WAN circuits (MPLS, DSL, broadband, 4G, and so on), an overlay network is being built that runs OMP (Overlay Management Protocol). Much like BGP, OMP propagates throughout the network all the routing information needed to forward data according to the routing policies configured in vManage.
+
+Cisco vManage provides a REST API interface that exposes the functionality of the Cisco SD-WAN software and hardware features. The API resources that are available through the REST interface are grouped in the following collections:
+
+- **Administration:** For management of users, groups, and local vManage instance
+- **Certificate Management:** For management of SSL certificates and security keys
+- **Configuration:** For creation of feature and device configuration templates and creation and configuration of vManage clusters
+- **Device Inventory:** For collecting device inventory information, including system status
+- **Monitoring:** For getting access to status, statistics, and related operational information about all the devices in the network every 10 minutes from all devices
+- **Real-Time Monitoring:** For gathering real-time monitoring statistics and traffic information approximately once per second
+- **Troubleshooting Tools:** For API calls used in troubleshooting, such as to determine the effects of applying a traffic policy, updating software, or retrieving software version information
+
+Cisco vManage exposes a self-documenting web interface for the REST API, based on the OpenAPI specification. This web interface is enabled by default and can be accessed at https://vManage_IP_or_hostname:port/apidocs. vManage_IP_or_hostname is the IP address or hostname of the Cisco vManage server, and the port is 8443 by default.
+
+The API documentation can be found at https://sdwan-docs.cisco.com/Product_Documentation/Command_Reference/Command_Reference/vManage_REST_APIs. At this link, you can find all the information needed on how to interact with the REST API, all the resources available, and extensive explanations.
+
+```
+curl -c - -X POST -k \
+https://sandboxsdwan.cisco.com:8443/j_security_check \
+-H 'Content-Type: application/x-www-form-urlencoded' \
+-d 'j_username=devnetuser&j_password=Cisco123!'
+```
+The status code of the response should be 200 OK and the JSESSIONID cookie should included. Further examples throught the documentation.
+
+
+The script was developed using Python 3.7.4 and version 2.22.0 of the requests library. The json library that comes with Python 3.7.4 was also used to deserialize and load the data returned from the REST API into a Python object; in this case, that object is a list. In this code, first, the import keyword makes the two libraries requests and json available for use within the script. Since the connection in the script is made to an instance of vManage that is in a sandbox environment and that uses a self-signed SSL certificate, the third and fourth lines of the script disable the warning messages that are generated by the requests library when connecting to REST API endpoints that are secured with self-signed SSL certificates. Next, the script specifies the vManage hostname and the username and password for this instance; this example uses the same vManage server used earlier in this chapter. The code then specifies the base URL for the vManage REST API endpoint: https://sandboxsdwan.cisco.com:8443. The code shows the authentication resource (j_security_check) and the login credentials, and then the login URL is built as a combination of the base URL and the authentication API resource. In the next line, a new request session instance is created and stored in the SESS variable.
+
+```
+#! /usr/bin/env python
+import json
+import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+# Specify Cisco vManage IP, username and password
+VMANAGE_IP = 'sandboxsdwan.cisco.com'
+USERNAME = 'devnetuser'
+PASSWORD = 'Cisco123!'
+BASE_URL_STR = 'https://{}:8443/'.format(VMANAGE_IP)
+# Login API resource and login credentials
+LOGIN_ACTION = 'j_security_check'
+LOGIN_DATA = {'j_username' : USERNAME, 'j_password' : PASSWORD}
+# URL for posting login data
+LOGIN_URL = BASE_URL_STR + LOGIN_ACTION
+# Establish a new session and connect to Cisco vManage
+SESS = requests.session()
+LOGIN_RESPONSE = SESS.post(url=LOGIN_URL, data=LOGIN_DATA, verify=False)
+# Get list of devices that are part of the fabric and display them
+DEVICE_RESOURCE = 'dataservice/device'
+# URL for device API resource
+DEVICE_URL = BASE_URL_STR + DEVICE_RESOURCE
+DEVICE_RESPONSE = SESS.get(DEVICE_URL, verify=False)
+DEVICE_ITEMS = json.loads(DEVICE_RESPONSE.content)['data']
+print('{0:20s}{1:1}{2:12s}{3:1}{4:36s}{5:1}{6:16s}{7:1}{8:7s}'.format("Host-Name", "|", "Device Model", "|", "Device ID", "|", "System IP", "|", "Site ID"))
+print('-'*105)
+for ITEM in DEVICE_ITEMS:
+  print('{0:20s}{1:1}{2:12s}{3:1}{4:36s}{5:1}{6:16s}{7:1}{8:7s}'.format(ITEM['host-name'], "|", ITEM['device-model'], "|", ITEM['uuid'], "|", ITEM['system-ip'], "|", ITEM['site-id']))
+print('-'*105)
+# Get list of device templates and display them
+TEMPLATE_RESOURCE = 'dataservice/template/device'
+# URL for device template API resource
+TEMPLATE_URL = BASE_URL_STR + TEMPLATE_RESOURCE
+TEMPLATE_RESPONSE = SESS.get(TEMPLATE_URL, verify=False)
+TEMPLATE_ITEMS = json.loads(TEMPLATE_RESPONSE.content)['data']
+print('{0:20s}{1:1}{2:12s}{3:1}{4:36s}{5:1}{6:16s}{7:1}{8:7s}'.format("Template Name", "|", "Device Model", "|", "Template ID", "|", "Attached devices", "|", "Template Version"))
+print('-'*105)
+for ITEM in TEMPLATE_ITEMS:
+  print('{0:20s}{1:1}{2:12s}{3:1}{4:36s}{5:1}{6:<16d}{7:1}{8:<7d}'\
+    .format(ITEM['templateName'], "|", ITEM['deviceType'], "|", \
+      ITEM['templateId'], "|"" ITEM['devicesAttached'], "|", ITEM['templateAttached']))
+print('-'*105)
+```
+
+
+
+
+
+
+
+
